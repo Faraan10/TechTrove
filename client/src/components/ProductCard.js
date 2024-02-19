@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Image, Text, Badge, Flex, IconButton, Skeleton } from "@chakra-ui/react";
 import { BiExpand } from "react-icons/bi";
 import { addToFavourites, removeFromFavourites } from "../redux/actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product, loading }) => {
+	const [isShown, setIsShown] = useState(false);
 	const { favourites } = useSelector((state) => state.product);
 	const dispatch = useDispatch();
 	return (
-		<Skeleton isLoaded={!loading} _hover={{ size: 1.5 }}>
+		<Skeleton isLoaded={!loading}>
 			<Box
 				_hover={{ transform: "scale(1.1)", transitionDuration: "0.5s" }}
 				borderWidth="1px"
@@ -18,7 +20,9 @@ const ProductCard = ({ product, loading }) => {
 				shadow="md"
 			>
 				<Image
-					src={product.images[0]}
+					onMouseOver={() => setIsShown(true)}
+					onMouseOut={() => setIsShown(false)}
+					src={product.images[isShown && product.images.length === 2 ? 1 : 0]}
 					fallbackSrc="https://via.placeholder.com/150"
 					alt={product.name}
 					height="170px"
@@ -64,7 +68,13 @@ const ProductCard = ({ product, loading }) => {
 						/>
 					)}
 
-					<IconButton icon={<BiExpand size="20" />} colorScheme="cyan" size="sm" />
+					<IconButton
+						icon={<BiExpand size="20" />}
+						as={Link}
+						to={`/product/${product._id}`}
+						colorScheme="cyan"
+						size="sm"
+					/>
 				</Flex>
 			</Box>
 		</Skeleton>

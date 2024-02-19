@@ -23,9 +23,22 @@ const getProducts = async (req, res) => {
 	}
 };
 
+const getProduct = async (req, res) => {
+	const product = await Product.findById(req.params.id);
+
+	if (product) {
+		res.status(200).json(product);
+	} else {
+		res.status(404);
+		throw new Error("Product not found");
+	}
+};
+
 // for users (getting an amount of products per page)
 productRoutes.route("/:page/:perPage").get(getProducts);
 // for admin (getting all products)
 productRoutes.route("/").get(getProducts);
+// getting product by id
+productRoutes.route("/:id").get(getProduct);
 
 export default productRoutes;

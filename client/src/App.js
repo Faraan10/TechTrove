@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import LandingScreen from "./screens/LandingScreen";
 import ProductsScreen from "./screens/ProductsScreen";
 import ProductScreen from "./screens/ProductScreen";
+import CartScreen from "./screens/CartScreen";
+import Footer from "./components/Footer";
 
 function App() {
 	return (
@@ -15,7 +17,9 @@ function App() {
 					<Route path="/" element={<LandingScreen />} />
 					<Route path="/products" element={<ProductsScreen />} />
 					<Route path="/product/:id" element={<ProductScreen />} />
+					<Route path="/cart" element={<CartScreen />} />
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</ChakraProvider>
 	);

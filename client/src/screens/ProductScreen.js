@@ -115,6 +115,9 @@ const ProductScreen = () => {
 									<Stack width="270px">
 										<Flex alignItems="center">
 											<BiPackage size="20px" />
+											<Text fontWeight="medium" fontSize="sm" ml="2">
+												Shipped in 4 - 5 days
+											</Text>
 										</Flex>
 										<Flex alignItems="center">
 											<BiCheckShield size="20px" />
